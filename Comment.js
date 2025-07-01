@@ -13,6 +13,7 @@ const commentSchema = new mongoose.Schema({
     required: true,
     index: true
   },
+  //look for
   post: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'BlogPost',
@@ -25,6 +26,7 @@ const commentSchema = new mongoose.Schema({
     default: null,
     index: true
   },
+  //jpg
   replies: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Comment'
