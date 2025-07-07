@@ -100,7 +100,9 @@ userSchema.methods.getPublicProfile = function() {
   const userObject = this.toObject();
   delete userObject.password;
   delete userObject.__v;
+  
   return userObject;
+  
 };
 
 // Static method to find user by email or username
