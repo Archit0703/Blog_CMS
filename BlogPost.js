@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const slugify = require('slugify');
+//openings 
 
 const blogPostSchema = new mongoose.Schema({
   title: {
