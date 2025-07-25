@@ -7,6 +7,7 @@ const commentSchema = new mongoose.Schema({
     trim: true,
     maxlength: [1000, 'Comment cannot exceed 1000 characters']
   },
+  
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
@@ -55,35 +56,46 @@ const commentSchema = new mongoose.Schema({
     type: Date,
     default: null
   },
+  
   ipAddress: {
     type: String,
     default: ''
   },
+  
   userAgent: {
     type: String,
     default: ''
   }
+  
 }, {
+  
   timestamps: true
 });
 
+
 // Indexes for better query performance
 commentSchema.index({ post: 1, status: 1, createdAt: -1 });
+
 commentSchema.index({ author: 1, createdAt: -1 });
+
 commentSchema.index({ parentComment: 1, createdAt: 1 });
+
 commentSchema.index({ 'likes.user': 1 });
 
 // Pre-save middleware to handle replies
+
 commentSchema.pre('save', async function(next) {
   // If this is a reply to another comment
   if (this.isNew && this.parentComment) {
+    
     try {
       // Add this comment to the parent's replies array
       await this.constructor.findByIdAndUpdate(
         this.parentComment,
         { $addToSet: { replies: this._id } }
       );
-    } catch (error) {
+    }
+    catch (error) {
       return next(error);
     }
   }
