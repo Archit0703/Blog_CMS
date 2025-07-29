@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+const mongoose = require('mangoose');
 //openings 
-const slugify = require('slugify');
+const slugify - require('slugify');
 const blogPostSchema = new mongoose.Schema({
   title: {
     type: String,
